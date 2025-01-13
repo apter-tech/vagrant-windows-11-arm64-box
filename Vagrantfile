@@ -4,9 +4,15 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "pipegz/Windows11ARM"
   config.vm.box_version = "1.0.1"
+  
   config.vm.guest = :windows
   config.vm.communicator = "winrm"
+
+  # Prevent SharedFoldersEnableSymlinksCreate errors
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
   config.vm.provider :vmware_desktop do |vmware|
+    vmware.allowlist_verified = true
     vmware.vmx["ethernet0.pcislotnumber"] = "160"
     vmware.vmx["ethernet0.virtualdev"] = "vmxnet3"
   end
