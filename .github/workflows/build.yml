@@ -1,0 +1,23 @@
+name: Validate Vagrant Setup
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  build-box:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install Dependencies
+        shell: sh
+        run: |
+          brew bundle --file Brewfile
+          vagrant plugin install vagrant-vmware-desktop
+      - name: Validate Vagrantfile Syntax
+        shell: sh
+        run: |
+          vagrant validate
