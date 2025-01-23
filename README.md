@@ -48,6 +48,12 @@ To customize the configuration, edit the Vagrantfile generated during initializa
 - **Provider:** vmware_desktop
 - **Base Box:** pipegz/Windows11ARM
 
+## Release upload
+
+```bash
+./upload.sh "1.0.1"
+```
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
